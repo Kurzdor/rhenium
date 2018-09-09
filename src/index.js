@@ -1,7 +1,7 @@
 import modal from './modal/modal'
 
 let Rhenium = {
-  modal: modal
+  Modal: modal
 };
 
 window.Rhenium = Rhenium;
