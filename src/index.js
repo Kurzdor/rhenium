@@ -1,7 +1,7 @@
-import modal from './modal/modal'
+import Modal from './modal/modal';
 
-let Rhenium = {
-  Modal: modal
+const Rhenium = {
+  Modal
 };
 
 window.Rhenium = Rhenium;

@@ -2,11 +2,14 @@
   "name": "rhenium-framework",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "module": "dist/rhenium.esm.js",
+  "browser": "dist/rhenium.umd.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "test": "",
+    "prebuild": "",
+    "prettier": ""
   },
   "keywords": [
     "framework",
@@ -15,10 +18,12 @@
   "author": "Kurzdor",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0"
+    "ava": "^0.25.0",
+    "rollup": "^0.65.2",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-babel-minify": "^6.0.0",
+    "xo": "^0.23.0"
   }
 }
