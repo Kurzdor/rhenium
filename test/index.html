@@ -8,9 +8,9 @@
 </head>
 <body>
 
-  <a href="#" data-rhenium-modal>Test</a>
-  <a href="#" data-rhenium-modal>Test</a>
-  <a href="#" data-rhenium-modal>Test</a>
+  <a href="#" data-rhenium-modal data-rhenium-target=".a-modal">Test</a>
+  <a href="#" data-rhenium-modal data-rhenium-target=".a-modal">Test</a>
+  <a href="#" data-rhenium-modal data-rhenium-target=".a-modal">Test</a>
 
   <div class="rhenium-modal-opener">fak</div>
 
@@ -20,10 +20,12 @@
   <script>
     var a = new Rhenium.Modal();
     console.log(a);
-    var classy = new Rhenium.Modal('.rhenium-modal-opener', {
-      speed: 500
-    });
-    console.log(classy);
+    // var classy = new Rhenium.Modal('.rhenium-modal-opener', {
+    //   speed: 500
+    // });
+    // console.log(classy);
+    a.destroy();
+    a.init();
   </script>
 </body>
 </html>

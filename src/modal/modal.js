@@ -1,38 +1,78 @@
-function Modal(el, options) {
-  function handleClick(e) {
-    e.preventDefault();
-    console.log('click!');
-    console.log(e.target.classList);
-    e.target.classList.add('clicked');
+class Modal {
+  constructor(el, options) {
+    this.el = el || '[data-rhenium-modal]';
+    this.options = Modal.optionsMerger(options);
+
+    ['clickHandler', 'resizeHandler'].forEach(method => {
+      this[method] = this[method].bind(this);
+    });
+
+    this.init();
   }
 
-  function optionsMerger(options) {
+  static optionsMerger(opts) {
     const instanceOptions = {
       speed: 300,
-      type: 'default'
-    }
+      type: 'default',
+      alert: false,
+      on: {
+        init: () => {}
+      }
+    };
 
-    const userOptions = options;
-    for (const attrname in userOptions) {
-      instanceOptions[attrname] = userOptions[attrname];
+    const userOptions = opts;
+
+    if (userOptions === 'null') {
+      return Object.keys(userOptions).forEach(key => {
+        instanceOptions[key] = userOptions[key];
+      });
     }
 
     return instanceOptions;
   }
 
-  el = el || '[data-rhenium-modal]';
-  options = optionsMerger(options);
+  attachEvents() {
+    window.addEventListener('resize', this.resizeHandler);
 
-  console.log(el);
-  console.log(options);
+    const modalElems = document.querySelectorAll(this.el);
+    for (let i = 0; i < modalElems.length; i += 1) {
+      const modalElem = modalElems[i];
 
-  console.log('it works');
-  const modalElems = document.querySelectorAll(el);
+      modalElem.addEventListener('click', this.clickHandler);
+    }
+  }
 
-  for (var i = 0; i < modalElems.length; i++) {
-    var modalElem = modalElems[i];
+  detachEvents() {
+    window.removeEventListener('resize', this.resizeHandler);
 
-    modalElem.addEventListener('click', handleClick);
+    const modalElems = document.querySelectorAll(this.el);
+    for (let i = 0; i < modalElems.length; i += 1) {
+      const modalElem = modalElems[i];
+
+      modalElem.removeEventListener('click', this.clickHandler);
+    }
+  }
+
+  // eslint-disable-next-line
+  clickHandler(e) {
+    e.preventDefault();
+    const attr = e.target.closest(this.el).dataset.rheniumTarget;
+    console.log(attr);
+  }
+
+  // eslint-disable-next-line
+  resizeHandler() {
+    console.log('resize handled');
+  }
+
+  destroy() {
+    console.log('Destroying instance!');
+    this.detachEvents();
+  }
+
+  init() {
+    console.log('Initializing Rhenium.Modal!');
+    this.attachEvents();
   }
 }
 
