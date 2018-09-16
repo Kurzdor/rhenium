@@ -9,4 +9,5 @@ const Rhenium = {
 
 window.Rhenium = Rhenium;
 
+export { Modal };
 export default Rhenium;
